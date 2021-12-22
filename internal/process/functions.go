@@ -2,13 +2,14 @@ package process
 
 import (
 	"errors"
-	"github.com/Juvenal-Yescas/gdown/internal/helpers/webscraping"
-	"github.com/Juvenal-Yescas/gdown/internal/utils"
-	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"regexp"
 	"strings"
+
+	"github.com/Juvenal-Yescas/gdown/internal/helpers/webscraping"
+	"github.com/Juvenal-Yescas/gdown/internal/utils"
+	log "github.com/sirupsen/logrus"
 )
 
 func GetUrlConfirmation(clientHttp *http.Client, idFile string) (string, error) {
@@ -71,7 +72,7 @@ func StartDownload(clientHttp *http.Client, urlDirect string, outputName string)
 
 func GetIdFromUrl(url string) (string, error) {
 	if utils.CaseInsensitiveContains(url, "google.com") {
-		if utils.CaseInsensitiveContains(url, "id") {
+		if utils.CaseInsensitiveContains(url, "?id=") {
 			arrayUrl := strings.Split(url, "=")
 			if utils.CaseInsensitiveContains(arrayUrl[1], "export") {
 				arrayUrl := strings.Split(arrayUrl[1], "&")
